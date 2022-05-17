@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="主页" />
+
+        <item
+            android:id="@+id/nav_collect"
+            android:icon="@mipmap/ic_nav_collect"
+            android:title="收藏" />
+
+        <item
+            android:id="@+id/toDoFragment"
+            android:icon="@mipmap/ic_nav_todo"
+            android:title="待办" />
+
+    </group>
+
+    <item android:title="其它">
+
+        <menu>
+            <item
+                android:id="@+id/nav_square"
+                android:icon="@mipmap/ic_nav_square"
+                android:title="广场" />
+
+            <item
+                android:id="@+id/nav_qa"
+                android:icon="@mipmap/ic_nav_qa"
+                android:title="问答" />
+        </menu>
+
+    </item>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_update"
+                android:icon="@mipmap/ic_nav_update"
+                android:title="更新" />
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@mipmap/ic_nav_about"
+                android:title="关于" />
+        </menu>
+    </item>
+
+</menu>

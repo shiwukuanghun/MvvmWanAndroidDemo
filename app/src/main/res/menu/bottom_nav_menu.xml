@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="主页"/>
+
+    <item android:id="@+id/navigation_dashboard"
+        android:icon="@mipmap/ic_wechat"
+        android:title="公众号"/>
+
+    <item android:id="@+id/navigation_notifications"
+        android:icon="@mipmap/ic_system"
+        android:title="体系"/>
+
+    <item android:id="@+id/navigation_navigation"
+        android:icon="@mipmap/ic_navigation"
+        android:title="导航"/>
+
+    <item android:id="@+id/navigation_project"
+        android:icon="@mipmap/ic_project"
+        android:title="项目"/>
+
+</menu>
