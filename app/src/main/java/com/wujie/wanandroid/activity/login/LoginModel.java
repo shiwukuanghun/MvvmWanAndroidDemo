@@ -1,4 +1,4 @@
-package com.wujie.wanandroid.activity;
+package com.wujie.wanandroid.activity.login;
 
 import android.text.TextUtils;
 import android.util.Log;

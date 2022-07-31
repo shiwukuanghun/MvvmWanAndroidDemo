@@ -30,4 +30,16 @@
         android:name="com.wujie.wanandroid.fragment.project.ProjectFragment"
         android:label="项目"
         tools:layout="@layout/fragment_project" />
+
+    <fragment
+        android:id="@+id/nav_collect"
+        android:name="com.wujie.wanandroid.fragment.collect.CollectFragment"
+        android:label="我的收藏"
+        tools:layout="@layout/fragment_collect" />
+    <fragment
+        android:id="@+id/nav_todo"
+        android:name="com.wujie.wanandroid.fragment.todo.TodoFragment"
+        android:label="我的待办"
+        tools:layout="@layout/fragment_todo" />
+
 </navigation>

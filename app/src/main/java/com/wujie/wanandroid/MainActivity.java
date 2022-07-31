@@ -10,20 +10,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.wujie.wanandroid.activity.LoginActivity;
+import com.wujie.wanandroid.activity.login.LoginActivity;
 import com.wujie.wanandroid.bean.UserInfo;
 import com.wujie.wanandroid.databinding.ActivityMainBinding;
 import com.wujie.wanandroid.db.repository.UserInfoRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.core.ObservableEmitter;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
-import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding> {

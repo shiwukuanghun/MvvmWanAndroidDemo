@@ -13,7 +13,7 @@
         android:name="com.wujie.wanandroid.MyApplication"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name="com.wujie.wanandroid.activity.LoginActivity"
+            android:name="com.wujie.wanandroid.activity.login.LoginActivity"
             android:exported="true">
 
         </activity>
