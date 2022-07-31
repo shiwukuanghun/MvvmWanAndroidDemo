@@ -6,14 +6,28 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.wujie.wanandroid.R;
 import com.wujie.wanandroid.activity.LoginActivity;
+import com.wujie.wanandroid.bean.UserInfo;
 import com.wujie.wanandroid.databinding.ActivityMainBinding;
+import com.wujie.wanandroid.db.repository.UserInfoRepository;
+
+import java.util.List;
+import java.util.Optional;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableEmitter;
+import io.reactivex.rxjava3.core.ObservableOnSubscribe;
+import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding> {
+    private static final String TAG = "MainActivity";
 
     private NavController mNavController;
     private AppBarConfiguration mAppBarConfiguration;
@@ -41,6 +55,16 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
                 startActivity(new Intent(mContext, LoginActivity.class));
             }
         });
+
+        Observable.create((ObservableOnSubscribe<Optional<UserInfo>>) emitter -> emitter.onNext(UserInfoRepository.getInstance().getUserInfo()))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(userInfo -> {
+                    UserInfo info = userInfo.orElse(null);
+                    if (info != null) {
+                        Log.d(TAG, "accept: " + info.username);
+                    }
+                });
     }
 
     @Override

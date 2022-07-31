@@ -5,7 +5,7 @@ package com.wujie.wanandroid.utils;
  * Description：
  */
 
-public class Constant {
+public interface Constant {
 
     public static String BaseUrl = "https://www.wanandroid.com";
     public static String BaseUrl2 = "https://uat.cocopk.com/sjmm/api/";
@@ -13,4 +13,7 @@ public class Constant {
     public static final String LoginInfo = "LoginInfo";
     public static final String WebUrl = "WebUrl";
 
+    interface UserInfoTable {
+        String TABLE_NAME = "userInfo";
+    }
 }

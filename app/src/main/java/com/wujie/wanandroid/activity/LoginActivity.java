@@ -1,5 +1,6 @@
 package com.wujie.wanandroid.activity;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.lifecycle.Observer;
@@ -12,6 +13,7 @@ import com.wujie.wanandroid.databinding.ActivityLoginBinding;
 import com.wujie.wanandroid.utils.ContextUtil;
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
+    private static final String TAG = "LoginActivity";
 
     @Override
     protected int getLayoutId() {
@@ -26,7 +28,9 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
         loginModel.getUserInfo().observe(this, new Observer<UserInfo>() {
             @Override
             public void onChanged(UserInfo userInfo) {
+                Log.d(TAG, "onChanged: 当前线程 = " + Thread.currentThread().getName());
                 Toast.makeText(ContextUtil.getContext(), "登录成功", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }

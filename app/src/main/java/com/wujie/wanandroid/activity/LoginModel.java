@@ -1,16 +1,20 @@
 package com.wujie.wanandroid.activity;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.wujie.wanandroid.bean.UserInfo;
+import com.wujie.wanandroid.db.repository.UserInfoRepository;
 import com.wujie.wanandroid.net.BaseObserver;
 import com.wujie.wanandroid.net.RxHelper;
 import com.wujie.wanandroid.net.RxRetrofit;
 import com.wujie.wanandroid.utils.ContextUtil;
+
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * @Author：created by WuChen
@@ -18,6 +22,7 @@ import com.wujie.wanandroid.utils.ContextUtil;
  * @Description：
  **/
 public class LoginModel extends ViewModel {
+    private static final String TAG = "LoginModel";
     private MutableLiveData<String> mUsername;
     private MutableLiveData<String> mPassword;
     private MutableLiveData<UserInfo> mUserInfo;
@@ -47,7 +52,9 @@ public class LoginModel extends ViewModel {
         }
 //        Toast.makeText(ContextUtil.getContext(), "username = " + mUsername.getValue(), Toast.LENGTH_SHORT).show();
         RxRetrofit.getApi().login(mUsername.getValue(), mPassword.getValue())
-                .compose(RxHelper.rxSchedulderHelper())
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+//                .compose(RxHelper.rxSchedulderHelper())
                 .compose(RxHelper.handleResult2())
                 .subscribeWith(new BaseObserver<UserInfo>() {
                     @Override
@@ -57,7 +64,9 @@ public class LoginModel extends ViewModel {
 
                     @Override
                     protected void onSuccess(UserInfo userInfo) {
-                        mUserInfo.setValue(userInfo);
+                        mUserInfo.postValue(userInfo);
+                        Log.d(TAG, "onSuccess: 当前线程 = " + Thread.currentThread().getName());
+                        UserInfoRepository.getInstance().insert(userInfo);
                     }
 
                     @Override

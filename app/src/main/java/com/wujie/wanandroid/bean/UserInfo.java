@@ -1,5 +1,11 @@
 package com.wujie.wanandroid.bean;
 
+import static com.wujie.wanandroid.utils.Constant.UserInfoTable.TABLE_NAME;
+
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import java.util.List;
 
 /**
@@ -7,20 +13,30 @@ import java.util.List;
  * @Time：2022/2/26 15:09
  * @Description：
  **/
+@Entity(tableName = TABLE_NAME)
 public class UserInfo {
-    private boolean admin;
-    private List<?> chapterTops;
-    private int coinCount;
-    private List<?> collectIds;
-    private String email;
-    private String icon;
-    private int id;
-    private String nickname;
-    private String password;
-    private String publicName;
-    private String token;
-    private int type;
-    private String username;
+    @PrimaryKey(autoGenerate = true)
+    public int id;
+    @Ignore
+    public boolean admin;
+    @Ignore
+    public List<?> chapterTops;
+    public int coinCount;
+    @Ignore
+    public List<?> collectIds;
+    @Ignore
+    public String email;
+    @Ignore
+    public String icon;
+    @Ignore
+    public String nickname;
+    public String password;
+    @Ignore
+    public String publicName;
+    @Ignore
+    public String token;
+    public int type;
+    public String username;
 
     public boolean isAdmin() {
         return admin;
