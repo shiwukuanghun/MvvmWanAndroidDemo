@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.wujie.wanandroid.fragment.todo.TodoViewModel" />
     </data>
 
     <LinearLayout
@@ -26,7 +28,7 @@
             app:srlEnableLoadMore="true">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycle"
+                android:id="@+id/rv_todo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </com.scwang.smart.refresh.layout.SmartRefreshLayout>

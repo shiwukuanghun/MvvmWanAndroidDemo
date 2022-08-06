@@ -1,6 +1,7 @@
 package com.wujie.wanandroid.utils;
 
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
 
@@ -22,6 +23,26 @@ public class BindingAdapterUtil {
                     .placeholder(R.mipmap.ic_launcher)
                     .error(R.mipmap.ic_launcher)
                     .into(imageView);
+        }
+    }
+
+    @BindingAdapter("todoGrade")
+    public static void setTodoGrade(ImageView imageView, int priority) {
+        if (priority == 0) {
+            imageView.setImageResource(R.mipmap.ic_star);
+        } else {
+            imageView.setImageResource(R.mipmap.ic_star_outline);
+        }
+    }
+
+    @BindingAdapter("todoStatus")
+    public static void setTodoStatus(TextView textView, int status) {
+        if (status == 0) {
+            textView.setText("未完成");
+            textView.setTextColor(ContextUtil.getContext().getResources().getColor(R.color.app_color_theme_1));
+        } else {
+            textView.setText("已完成");
+            textView.setTextColor(ContextUtil.getContext().getResources().getColor(R.color.color_blue));
         }
     }
 }

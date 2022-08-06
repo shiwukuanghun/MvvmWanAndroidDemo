@@ -1,11 +1,15 @@
 package com.wujie.wanandroid.fragment.todo;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.base.BaseFilterTabBean;
@@ -14,16 +18,25 @@ import com.ccj.poptabview.bean.FilterTabBean;
 import com.ccj.poptabview.listener.OnPopTabSetListener;
 import com.ccj.poptabview.loader.PopEntityLoaderImp;
 import com.ccj.poptabview.loader.ResultLoaderImp;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 import com.wujie.wanandroid.BaseFragment;
 import com.wujie.wanandroid.R;
+import com.wujie.wanandroid.adapter.TodoAdapter;
+import com.wujie.wanandroid.bean.TodoBean;
 import com.wujie.wanandroid.databinding.FragmentTodoBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TodoFragment extends BaseFragment<FragmentTodoBinding> implements OnPopTabSetListener {
+    private static final String TAG = "TodoFragment";
 
     private com.wujie.wanandroid.databinding.FragmentTodoBinding mBinding;
+    private TodoViewModel mTodoViewModel;
+    private List<TodoBean> mTodoDataList;
+    private TodoAdapter mTodoAdapter;
 
     @Override
     public int getLayoutId() {
@@ -35,7 +48,43 @@ public class TodoFragment extends BaseFragment<FragmentTodoBinding> implements O
         super.init(binding);
         setHasOptionsMenu(true);  // 加这一行才能显示右上角的“+”号
         mBinding = binding;
+        mTodoViewModel = new ViewModelProvider(this, 
+                new ViewModelProvider.AndroidViewModelFactory(getActivity().getApplication())).get(TodoViewModel.class);
+        mBinding.setViewModel(mTodoViewModel);
+        mBinding.setLifecycleOwner(this);
+        initRefreshLayout();
+        initAdapter();
         addMyMethod();
+        mTodoViewModel.loadTodoList();
+    }
+
+    private void initRefreshLayout() {
+        mBinding.refreshLayout.setOnRefreshListener(refreshLayout -> {
+            mTodoViewModel.refreshTodoData(true);
+        });
+        mBinding.refreshLayout.setOnLoadMoreListener(refreshLayout -> {
+            mTodoViewModel.refreshTodoData(false);
+        });
+    }
+
+    private void initAdapter() {
+        mBinding.rvTodo.setHasFixedSize(true);
+        mBinding.rvTodo.setLayoutManager(new LinearLayoutManager(getContext()));
+        mTodoDataList = new ArrayList<>();
+        mTodoAdapter = new TodoAdapter();
+        mBinding.rvTodo.setAdapter(mTodoAdapter);
+        mTodoViewModel.getDataList().observe(this, new Observer<List<TodoBean>>() {
+            @Override
+            public void onChanged(List<TodoBean> todoBeans) {
+                if (mTodoViewModel.isRefresh()) {
+                    mTodoAdapter.setNewInstance(todoBeans);
+                    mBinding.refreshLayout.finishRefresh();
+                } else {
+                    mTodoAdapter.addData(todoBeans);
+                    mBinding.refreshLayout.finishLoadMore();
+                }
+            }
+        });
     }
 
     @Override
@@ -128,6 +177,28 @@ public class TodoFragment extends BaseFragment<FragmentTodoBinding> implements O
 
     @Override
     public void onPopTabSet(int index, String lable, Object params, String value) {
-
+        if (value != null) {
+            if (index == 0) {
+                if (value.equals("全部")) {
+                    mTodoViewModel.setType(0);
+                } else if (value.equals("学习")) {
+                    mTodoViewModel.setType(1);
+                } else if (value.equals("工作")) {
+                    mTodoViewModel.setType(2);
+                } else if (value.equals("生活")) {
+                    mTodoViewModel.setType(3);
+                } else if (value.equals("其他")) {
+                    mTodoViewModel.setType(4);
+                }
+            } else {
+                if (value.equals("全部")) {
+                    mTodoViewModel.setPriority(0);
+                } else if (value.equals("重要")) {
+                    mTodoViewModel.setPriority(1);
+                } else if (value.equals("一般")) {
+                    mTodoViewModel.setPriority(2);
+                }
+            }
+        }
     }
 }

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.wujie.wanandroid.fragment.todo.AddTodoViewModel" />
+            type="com.wujie.wanandroid.fragment.todo.addtodo.AddTodoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,7 +45,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/view" />
 
 
-                   <!-- <ImageView
+                    <ImageView
                         android:id="@+id/iv_priority"
                         android:layout_width="@dimen/dimen_24"
                         android:layout_height="@dimen/dimen_24"
@@ -53,7 +53,7 @@
                         android:layout_marginRight="@dimen/margin"
                         android:onClick="@{()->viewModel.changeToDoPriority()}"
                         android:src="@mipmap/ic_star_outline"
-                        app:todoGrade="@{viewModel.priority}" />-->
+                        app:todoGrade="@{viewModel.mPriority}" />
 
                 </LinearLayout>
 
@@ -208,7 +208,7 @@
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="15dp"
             android:onClick="@{()->viewModel.addData()}"
-            android:text="@{viewModel.date}"
+            android:text="添加"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"

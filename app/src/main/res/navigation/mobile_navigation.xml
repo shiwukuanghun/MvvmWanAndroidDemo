@@ -43,7 +43,7 @@
         tools:layout="@layout/fragment_todo" />
     <fragment
         android:id="@+id/addTodoFragment"
-        android:name="com.wujie.wanandroid.fragment.todo.AddTodoFragment"
+        android:name="com.wujie.wanandroid.fragment.todo.addtodo.AddTodoFragment"
         android:label="新增待办" />
 
 </navigation>

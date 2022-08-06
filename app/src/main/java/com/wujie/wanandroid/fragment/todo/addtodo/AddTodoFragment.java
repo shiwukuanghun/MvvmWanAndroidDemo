@@ -1,9 +1,6 @@
-package com.wujie.wanandroid.fragment.todo;
+package com.wujie.wanandroid.fragment.todo.addtodo;
 
-import android.app.DatePickerDialog;
 import android.util.Log;
-import android.widget.DatePicker;
-import android.widget.RadioGroup;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -12,9 +9,6 @@ import com.wujie.wanandroid.BaseFragment;
 import com.wujie.wanandroid.R;
 import com.wujie.wanandroid.bean.TodoBean;
 import com.wujie.wanandroid.databinding.FragmentAddTodoBinding;
-import com.wujie.wanandroid.manager.MyActivityManager;
-
-import java.util.Calendar;
 
 /**
  * @Author：created by WuChen
