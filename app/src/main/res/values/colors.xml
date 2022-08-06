@@ -24,4 +24,24 @@
     <color name="text_color">#1a1919</color>
 
     <color name="background">#f0eff4</color>
+
+    <color name="color_white">#FFFFFF</color>
+
+    <!--MD 字体颜色-->
+    <color name="text_black_87">#D4000000</color>
+    <color name="text_black_54">#8A000000</color>
+    <color name="text_black_26">#42000000</color>
+    <color name="text_black_12">#1E000000</color>
+
+    <!-- 标准颜色-->
+    <color name="color_black">#000000</color>
+    <color name="color_red">#F44336</color>
+    <color name="color_green">#4CAF50</color>
+    <color name="color_blue">#2196f3</color>
+    <color name="color_grey">#9E9E9E</color>
+    <color name="color_grey_dark">#616161</color>
+    <color name="color_grey_light">#F5F5F5</color>
+    <color name="color_transparent">#00000000</color>
+    <color name="color_background">#515151</color>
+    <color name="color_transparent_bg">#80FFFFFF</color>
 </resources>

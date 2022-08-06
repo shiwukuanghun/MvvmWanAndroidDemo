@@ -7,4 +7,15 @@
     <string name="add">添加</string>
     <string name="done_time">计划完成时间</string>
     <string name="add_todo_title">新增待办</string>
+
+    <string name="todo_title">标题</string>
+    <string name="todo_update">更新待办事项</string>
+    <string name="todo_add">添加</string>
+
+    <string name="todo_type">分类</string>
+
+    <string name="todo_study">学习</string>
+    <string name="todo_work">工作</string>
+    <string name="todo_life">生活</string>
+    <string name="todo_other">其他</string>
 </resources>

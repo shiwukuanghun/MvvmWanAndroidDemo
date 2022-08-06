@@ -1,10 +1,17 @@
 package com.wujie.wanandroid;
 
+import android.app.Activity;
 import android.app.Application;
+import android.os.Bundle;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
+import com.wujie.wanandroid.manager.MyActivityManager;
 import com.wujie.wanandroid.net.RxRetrofit;
 import com.wujie.wanandroid.utils.Constant;
 import com.wujie.wanandroid.utils.ContextUtil;
@@ -16,6 +23,7 @@ import com.wujie.wanandroid.utils.SpUtils;
  * @Description：
  **/
 public class MyApplication extends Application {
+    private static final String TAG = "MyApplication";
     @Override
     public void onCreate() {
         super.onCreate();
@@ -23,6 +31,50 @@ public class MyApplication extends Application {
         ContextUtil.setContext(this);
         SpUtils.init(this);
         RxRetrofit.getInstance().initRetrofit(Constant.BaseUrl);
+        initActivityManager();
+    }
+
+    /**
+     * 管理Activity
+     */
+    private void initActivityManager() {
+        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
+            @Override
+            public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
+                Log.d(TAG, "onActivityCreated: ");
+            }
+
+            @Override
+            public void onActivityStarted(@NonNull Activity activity) {
+                Log.d(TAG, "onActivityStarted: ");
+            }
+
+            @Override
+            public void onActivityResumed(@NonNull Activity activity) {
+                Log.d(TAG, "onActivityResumed: ");
+                MyActivityManager.getInstance().setCurrentActivity(activity);
+            }
+
+            @Override
+            public void onActivityPaused(@NonNull Activity activity) {
+                Log.d(TAG, "onActivityPaused: ");
+            }
+
+            @Override
+            public void onActivityStopped(@NonNull Activity activity) {
+                Log.d(TAG, "onActivityStopped: ");
+            }
+
+            @Override
+            public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {
+                Log.d(TAG, "onActivitySaveInstanceState: ");
+            }
+
+            @Override
+            public void onActivityDestroyed(@NonNull Activity activity) {
+                Log.d(TAG, "onActivityDestroyed: ");
+            }
+        });
     }
 
     /**

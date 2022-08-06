@@ -5,6 +5,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.ccj.poptabview.FilterConfig;
 import com.ccj.poptabview.base.BaseFilterTabBean;
@@ -46,7 +47,7 @@ public class TodoFragment extends BaseFragment<FragmentTodoBinding> implements O
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_add) {
-
+            NavHostFragment.findNavController(this).navigate(R.id.addTodoFragment);
         }
         return super.onOptionsItemSelected(item);
     }
